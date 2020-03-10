@@ -6,6 +6,7 @@ use rand::Rng;
 
 use std::cmp::Ordering;
 use std::collections::HashMap;
+use std::io::Write;
 
 
 fn main() {
@@ -16,6 +17,7 @@ fn main() {
 
     //test3
     third();
+//    func_name();
 }
 
 // 使用哈希 map 和 vector，创建一个文本接口来允许用户向公司的部门中增加员工的名字。
@@ -23,30 +25,41 @@ fn main() {
 // 一个部门的所有员工的列表，或者公司每个部门的所有员工按照字典序排列的列表。
 fn third() {
     // crete map and vector
-    let mut map: HashMap<&str, &Vec<&str>> = HashMap::new();
+    let mut map: HashMap<String, Vec<String>> = HashMap::new();
+//    let mut cmd = String::new();
     loop {
         print!(">>");
-        let mut cmd = String::new();
-        io::stdin().read_line(&mut cmd).expect("Failed to read number");
-        if cmd.eq(&"exit".to_string()) {
-            break;
-        }
-        let mut words = cmd.split_whitespace();
+        io::stdout().flush().unwrap();
+        let mut cs = String::from("");
+        io::stdin().read_line(&mut cs).expect("Failed to read number");
+//        if cs.eq(&"exit".to_string()) {
+//            break;
+//        }
+        let mut words = cs.trim().split_whitespace();
         let fi = words.next();
         if fi == Some("Add") {
-            let key = words.next().unwrap();
-            let to = words.next().unwrap();
-            let value = words.next().unwrap();
-            if map.contains_key(key) {
-                map.get(key).unwrap().push(value);
+            let value = words.next().unwrap().to_string();
+            let _to = words.next().unwrap();
+            let key = words.next().unwrap().to_string();
+            if map.contains_key(&key) {
+                map.get_mut(&key).unwrap().push(value);
             } else {
                 let mut vec = Vec::new();
                 vec.push(value);
-                map.insert(key, &vec);
+                map.insert(key, vec);
             }
         } else {
-            for value in **map.get(fi.unwrap()).unwrap() {
-                print!("{} ", value);
+            match map.get(fi.unwrap()) {
+                Some(value) => {
+                    for val in value {
+                        print!("{} ", val);
+                    }
+                    print!("\n");
+                    io::stdout().flush().unwrap();
+                }
+                None => {
+                    println!("no company found!");
+                }
             }
         }
     }
