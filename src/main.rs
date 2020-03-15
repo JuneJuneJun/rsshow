@@ -32,9 +32,9 @@ fn third() {
         io::stdout().flush().unwrap();
         let mut cs = String::from("");
         io::stdin().read_line(&mut cs).expect("Failed to read number");
-//        if cs.eq(&"exit".to_string()) {
-//            break;
-//        }
+        if cs.trim().eq("exit") {
+            break;
+        }
         let mut words = cs.trim().split_whitespace();
         let fi = words.next();
         if fi == Some("Add") {

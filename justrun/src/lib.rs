@@ -14,11 +14,14 @@ macro_rules! vec {
 }
 
 
+#[cfg(test)]
 mod tests {
     #[test]
-    fn it_works() {
-        let v = vec![1, 2, 3, 4, 5];
-        let does_not_exist = &v[100];
-        let does_not_exist = v.get(100);
+    fn it_works() -> Result<(), String> {
+        if 2 + 2 == 4 {
+            Ok(())
+        } else {
+            Err(String::from("two plus two does not equal four"))
+        }
     }
 }
