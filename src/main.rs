@@ -1,22 +1,32 @@
 #![allow(dead_code)]
 #![allow(unused_assignments)]
 
-use std::io;
+use std::{io, env, process};
 use rand::Rng;
 
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::io::Write;
+use minigrep::Config;
 
 
 fn main() {
+    let params: Vec<String> = env::args().collect();
+    let config = Config::new(&params).unwrap_or_else(|err| {
+        println!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
+    if let Err(e) = minigrep::run(&config) {
+        println!("run error : {}", e.to_string());
+        process::exit(1);
+    }
 //    func2()
     // test2
-    println!("{}", first_fay(&mut String::from("first")));
-    println!("{}", first_fay(&mut String::from("apple")));
+//    println!("{}", first_fay(&mut String::from("first")));
+//    println!("{}", first_fay(&mut String::from("apple")));
 
     //test3
-    third();
+//    third();
 //    func_name();
 }
 
