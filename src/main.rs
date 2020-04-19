@@ -1,25 +1,47 @@
 #![allow(dead_code)]
 #![allow(unused_assignments)]
 
-use std::{io, env, process};
+use std::{io, env, process, thread};
 use rand::Rng;
 
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::io::Write;
 use minigrep::Config;
+use std::sync::mpsc;
+use std::time::Duration;
 
 
 fn main() {
-    let params: Vec<String> = env::args().collect();
-    let config = Config::new(&params).unwrap_or_else(|err| {
-        println!("Problem parsing arguments: {}", err);
-        process::exit(1);
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
     });
-    if let Err(e) = minigrep::run(&config) {
-        println!("run error : {}", e.to_string());
-        process::exit(1);
+
+    for received in rx {
+        println!("Got: {}", received);
     }
+//    let params: Vec<String> = env::args().collect();
+//    let config = Config::new(&params).unwrap_or_else(|err| {
+//        println!("Problem parsing arguments: {}", err);
+//        process::exit(1);
+//    });
+//    if let Err(e) = minigrep::run(&config) {
+//        println!("run error : {}", e.to_string());
+//        process::exit(1);
+//    }
+
 //    func2()
     // test2
 //    println!("{}", first_fay(&mut String::from("first")));
