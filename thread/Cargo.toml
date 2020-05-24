@@ -1,0 +1,20 @@
+[package]
+name = "thread"
+version = "0.1.0"
+authors = ["June <hqerth@163.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+justrun = {path = "../justrun"}
+minigrep = {path = "../minigrep"}
+
+rand = "^0.7"
+futures = "0.3.4"
+async-std = "1.5.0"
+libp2p = "0.18.1"
+
+[[bin]]
+name="thread"
+path="src/main.rs"

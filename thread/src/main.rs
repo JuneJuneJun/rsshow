@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 #![allow(unused_assignments)]
+#![allow(unused)]
 
 use std::{io, env, process, thread};
 use rand::Rng;
@@ -11,27 +12,16 @@ use minigrep::Config;
 use std::sync::mpsc;
 use std::time::Duration;
 
+mod future;
+mod libp2p;
 
 fn main() {
-    let (tx, rx) = mpsc::channel();
-
-    thread::spawn(move || {
-        let vals = vec![
-            String::from("hi"),
-            String::from("from"),
-            String::from("the"),
-            String::from("thread"),
-        ];
-
-        for val in vals {
-            tx.send(val).unwrap();
-            thread::sleep(Duration::from_secs(1));
-        }
-    });
-
-    for received in rx {
-        println!("Got: {}", received);
+    for args in std::env::args_os() {
+        println!("{:?}", args);
     }
+//    libp2p::test_libp2p();
+//    future::test_future();
+//    future::test_mpsc();
 //    let params: Vec<String> = env::args().collect();
 //    let config = Config::new(&params).unwrap_or_else(|err| {
 //        println!("Problem parsing arguments: {}", err);

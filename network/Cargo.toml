@@ -1,0 +1,15 @@
+[package]
+name = "network"
+version = "0.1.0"
+authors = ["June <hqerth@163.com>"]
+edition = "2018"
+
+
+
+[dependencies]
+libp2p = {version= "0.18.1"}
+
+
+[[bin]]
+name="libp"
+path="src/main.rs"
