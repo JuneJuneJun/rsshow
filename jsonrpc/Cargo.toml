@@ -1,0 +1,13 @@
+[package]
+name = "jsonrpc"
+version = "0.1.0"
+authors = ["June <hqerth@163.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jsonrpc-core = "14.2.0"
+jsonrpc-http-server = "14.2"
+jsonrpc-derive = "14.2.1"
+jsonrpc-core-client = "14.2.0"
