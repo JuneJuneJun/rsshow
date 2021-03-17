@@ -1,0 +1,17 @@
+[package]
+name = "calc"
+version = "0.1.0"
+authors = ["June <hqerth@163.com>"]
+edition = "2018"
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+inkwell = { git = "https://github.com/TheDan64/inkwell", features = ["llvm3-7"] }
+failure = "0.1.1"
+lalrpop-util = "0.14.0"
+regex = "0.2.7"
+
+[build-dependencies]
+lalrpop = "0.14.0"

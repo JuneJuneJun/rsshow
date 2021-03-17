@@ -1,7 +1,12 @@
 [workspace]
-members=[
+members = [
     "thread",
     "tokiotest",
     "network",
-    "jsonrpc"
+    "jsonrpc",
+    "wasmer",
+    "macro_test",
+    "macro_test/hello_macro_derive",
+    "calc",
+    "basic"
 ]

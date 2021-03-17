@@ -1,5 +1,7 @@
 use std::{fs, error};
 
+mod seder;
+
 #[cfg(test)]
 mod tests {
     use crate::search;

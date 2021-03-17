@@ -5,7 +5,7 @@ use jsonrpc_derive::rpc;
 pub trait Rpc {
     /// Adds two numbers and returns a result
     #[rpc(name = "add")]
-    fn add(&self, _: u64, _: u64) -> Result<u64>;
+    fn add(&self, a: u64, b: u64) -> Result<u64>;
 }
 
 pub struct RpcImpl;
